@@ -113,3 +113,58 @@ def game():
 
 # Run game
 game()
+
+import random
+
+def get_all_valid_moves(board, player):
+    moves = []
+    for sr in range(8):
+        for sc in range(8):
+            for er in range(8):
+                for ec in range(8):
+                    if is_valid_move(board, sr, sc, er, ec, player):
+                        moves.append((sr, sc, er, ec))
+    return moves
+
+def ai_move(board):
+    moves = get_all_valid_moves(board, "black")
+    if not moves:
+        return None
+    return random.choice(moves)
+
+def game():
+    board = create_board()
+    player = "white"
+
+    while True:
+        print_board(board)
+
+        if player == "white":
+            print("Your turn (e.g., e2 e4)")
+            move = input("Move: ")
+            parsed = parse_move(move)
+
+            if not parsed:
+                print("Invalid format.")
+                continue
+
+            sr, sc, er, ec = parsed
+
+            if not is_valid_move(board, sr, sc, er, ec, player):
+                print("Illegal move!")
+                continue
+
+        else:
+            print("AI is thinking...")
+            ai = ai_move(board)
+
+            if ai is None:
+                print("AI has no moves. Game over.")
+                break
+
+            sr, sc, er, ec = ai
+            print(f"AI plays: {chr(sc+97)}{8-sr} {chr(ec+97)}{8-er}")
+
+        move_piece(board, sr, sc, er, ec)
+
+        player = "black" if player == "white" else "white"
