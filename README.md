@@ -11,6 +11,7 @@ A simple text-based chess game built in Python.
 1. Download the repo
 2. Run:
    python chess.py
+   or use this website: https://text-chess--dodwrot24.replit.app
 
 ## Example Move
 e2 e4
