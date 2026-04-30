@@ -168,3 +168,20 @@ def game():
         move_piece(board, sr, sc, er, ec)
 
         player = "black" if player == "white" else "white"
+
+def is_path_clear(board, sr, sc, er, ec):
+    dr = er - sr
+    dc = ec - sc
+
+    step_r = (dr > 0) - (dr < 0)  # gives -1, 0, or 1
+    step_c = (dc > 0) - (dc < 0)
+
+    r, c = sr + step_r, sc + step_c
+
+    while (r, c) != (er, ec):
+        if board[r][c] != ".":
+            return False
+        r += step_r
+        c += step_c
+
+    return True
