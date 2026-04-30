@@ -21,4 +21,4 @@ e2 e4
 - Add GUI (graphical board)
 
 ## Author
-YourNameHere
+VRandomV2016
